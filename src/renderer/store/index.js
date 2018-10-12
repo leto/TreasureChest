@@ -5,12 +5,15 @@ var hush      = require('hush')
 
 import Vue from 'vue'
 import Vuex from 'vuex'
+  import VueI18n from 'vue-i18n'
+    import messages from '../../lang/messages'
 import ElementUI from 'element-ui';
 import modules from './modules'
 import hushlist from './modules/hushlist';
 import os from 'os'
 import fs from 'fs'
 import axios from 'axios'
+//import vuexI18n from 'vuex-i18n/dist/vuex-i18n.umd.js';
 
 var config = new hush.Config()
 var client = new hushrpc.Client({
@@ -21,17 +24,53 @@ var client = new hushrpc.Client({
 });
 function log(msg) { console.log(msg) }
 function encodeMemo(memo) {
-    var encoded_memo = "";
-    if(memo) {
-            for (var j = 0; j < memo.length; j += 1) {
-            encoded_memo = encoded_memo + memo.charCodeAt(j).toString(16);
+    var encodedMemo = '';
+
+    if (memo) {
+        console.log("Encoding raw memo: '" + memo + "' length =" + memo.length);
+        if(memo) {
+            for (var j = 0; j < memo.length; j++) {
+                encodedMemo = encodedMemo + sprintf("%02x",memo.charCodeAt(j) );
             }
+        }
+        console.log("Encoded memo length=" + encodedMemo.length);
+   } else {
+       return encodedMemo;
+   }
+}
+
+//TODO: it would be nice to use this for binary memos as well, or maybe
+// we need a decodeBinaryMemo
+function decodeMemo(memo) {
+    var decodedMemo = '';
+    // empty and/or binary memos start with f6
+    if(!memo.startsWith('f6')) {
+        for (var j = 0; j < memo.length; j += 2) {
+            var  str = memo.substring(j, j + 2);
+            if (str != "00") {// Zero bytes are empty
+                decodedMemo = decodedMemo + String.fromCharCode(parseInt(str, 16));
+            }
+        }
     }
-    return encoded_memo;
+    return decodedMemo;
 }
 
 Vue.use(Vuex)
-let vue = new Vue()
+Vue.use(VueI18n)
+
+// Create VueI18n instance with options
+//let localisation = navigator.language
+let localisation = navigator.language.split("-")[0] // Use browser first language
+const i18n = new VueI18n({
+   fallbackLocale: 'en',
+   locale: localisation,
+   //dateTimeFormats,
+   //numberFormats
+   messages
+})
+
+let vue = new Vue({ i18n })
+
 
 // TODO: GUI option for this and read from config file!
 var privacy_mode       = 0;
@@ -54,23 +93,23 @@ var store = new Vuex.Store({
     priceEUR: '...',
     priceUSD: '...',
     totalBalance: { 
-      balance :'Calculating...',
+      balance : i18n.t('message.calculating'),
       valid :true
     },
     tBalance: { 
-      balance : 'Calculating...',
+      balance : i18n.t('message.calculating'),
       valid :true
     },
     zBalance: { 
-      balance : 'Calculating...',
+      balance : i18n.t('message.calculating'),
       valid :true
     },
     unconfirmedBalance: 0.0,
     availableBalance :0.0,
     totalAmount: '...',
-    blockHeight: 'Scanning...',
+    blockHeight: i18n.t('message.scanning'),
     magicString: '...',
-    peerCount: 'Discovering...',
+    peerCount: i18n.t('message.discovering'),
     walletPolling: false,
     rpcCredentials : {
       user : "",
@@ -143,11 +182,11 @@ var store = new Vuex.Store({
         }
 
         if (operation.status != op.status && op.status === "executing") {
-          vue.$message.warning('Operation is executing. Check the pending operation list for further information', 5000 );     
+          vue.$message.warning(i18n.t('message.operation_is_executing'), 5000 );     
         }
               
         if (operation.status != op.status && op.status === "success" ) {
-          vue.$message.success('Transaction was created successfully. Transaction id is:' + op.result.txid, 5000 );            
+          vue.$message.success(i18n.t('message.transaction_was_created_successfully') + op.result.txid, 5000 );            
         }    
 
         operation.date = Date.now();
@@ -252,6 +291,9 @@ var store = new Vuex.Store({
     setContacts (state, contacts) {      
       state.contacts = contacts;
     },
+    setConfig (state, config) {      
+      state.config = config;
+    },
     addOrUpdateContact (state, contact) {
       console.log(contact);
       var c;
@@ -267,20 +309,22 @@ var store = new Vuex.Store({
         }
       }
 
+
+
       if (!contact.nickName) {
-          vue.$message.error("Contacts must have a nickname");
+          vue.$message.error(i18n.t('message.contacts_must_have_a_nickname'))
           return;
       }
 
       if (!contact.address) {
-          vue.$message.error("Contacts must have an address");
+          vue.$message.error(i18n.t('message.contacts_must_have_an_address'));
           return;
       }
 
       // TODO: support testnet and other chains
       // TODO: Sapling address format might be different!
       if (!contact.address.match(/^zc[a-z0-9]{93}$/i) ) {
-          vue.$message.error("Invalid address for contact");
+          vue.$message.error(i18n.t('message.invalid_address_for_contact'));
           return;
       }
 
@@ -290,7 +334,7 @@ var store = new Vuex.Store({
       } else {
         var found = state.contacts.find( a => a.address == contact.address);
         if (found) {
-            vue.$message.error("There is already a contact \"" + found.nickName + "\" with address " + found.address);
+            vue.$message.error(i18n.t('message.there_is_already_a_contact') + " : " + found.nickName + i18n.t('message.with_address') + " : " + found.address);
             return;
         }
       }
@@ -529,19 +573,12 @@ var store = new Vuex.Store({
 
         for(let transactionResult of allZTransactionResults) {
           var zTransaction = await client.getTransaction(transactionResult.txid);
-          var decodedText = "";
-          if(!transactionResult.memo.startsWith('f60000')) {
-            for (var j = 0; j < transactionResult.memo.length; j += 2) {
-              var  str = transactionResult.memo.substring(j, j + 2);
-              if (str != "00") {// Zero bytes are empty
-                decodedText = decodedText + String.fromCharCode(parseInt(str, 16));               
-              }
-            }
-          }
+          var decodedText = decodeMemo(transactionResult.memo);
+
           var memo = null;
           if(decodedText.length > 0) {
             memo = decodedText;
-            //console.log(memo);
+            console.log('memo=' + memo);
           }
           var address = transactionResult.address;
 		  var amount  = transactionResult.amount;
@@ -591,7 +628,7 @@ var store = new Vuex.Store({
             rescan = 'whenkeyisnew';
             height = 0;
             var result = await client.z_importkey(wif,rescan,height);
-            vue.$message.success("Imported shielded address from WIF");
+            vue.$message.success(i18n.t(message.imported_shielded_address_from_WIF));
         } catch (err) {
             console.log("params=" + wif + "," +  rescan + "," + height);
             console.log(err);
@@ -604,7 +641,7 @@ var store = new Vuex.Store({
             var label = "";
             rescan = true;
             var result = await client.importPrivKey(wif,label,rescan);
-            vue.$message.success("Imported transparent address from WIF");
+            vue.$message.success(i18n.t(message.imported_transparent_address_from_WIF));
         } catch (err) {
             console.log("params=" + wif + "," + label + "," + rescan);
             console.log(err);
@@ -617,7 +654,7 @@ var store = new Vuex.Store({
         var result = await client.getNewAddress();
         console.log(result);
         commit('addAddress', {address: result, balance: '...', type: 't'});
-        var msg = "Created new taddr " + result;
+        var msg = i18n.t(message.created_new_taddr) + " " + result;
         console.log(msg);
         vue.$message.success(msg);
       }
@@ -631,7 +668,7 @@ var store = new Vuex.Store({
       try {
         var result = await client.z_getnewaddress();
         commit('addAddress', {address: result, balance: '...', type: 'z'});
-        var msg = "Created new zaddr " + result;
+        var msg = i18n.t(message.created_new_zaddr) + " " + result;
         console.log(msg);
         vue.$message.success(msg);
       }
@@ -640,9 +677,28 @@ var store = new Vuex.Store({
       }
     },
 
+
+    // We can expect this to timeout sometimes
+    async importViewingKey({ commit }, viewkey) {
+      var self = this;
+      // Instead of storing viewkeys on disk, we look them up as needed
+      try {
+          // don't look thru all of time for HL VKs
+          var height = 312632;
+          var result = await client.z_importviewingkey(viewkey, "whenkeyisnew", height);
+          log("Imported viewkey=" + viewkey);
+          return 1;
+      } catch(err) {
+          log(err);
+          vue.$notify.error({ title: i18n.t(message.error_importing_viewkey) + viewkey, message: err.message, duration: 0, showClose: true });
+          return 0;
+      }
+    },
+
     async exportViewingKey({ commit }, chatForm) {
       var self = this;
       // Instead of storing viewkeys on disk, we look them up as needed
+      // TODO: cache these in memory, as they never change for an address
       try {
           var result = await client.z_exportviewingkey(chatForm.conversationAddress);
           log("Retreived viewkey " + result);
@@ -651,7 +707,7 @@ var store = new Vuex.Store({
           return result;
       } catch(err) {
           log(err);
-          vue.$notify.error({ title: "Error retreiving viewkey for " + chatForm.conversationAddress, message: err.message, duration: 0, showClose: true });
+          vue.$notify.error({ title: i18n.t('message.error_retreiving_viewkey_for') + " " + chatForm.conversationAddress, message: err.message, duration: 0, showClose: true });
           return;
       }
     },
@@ -723,7 +779,7 @@ var store = new Vuex.Store({
         var result = await client.z_sendmany(from,receivers,minConf,networkFee);
       } catch(err) {
         //vue.$message.error(err);
-        vue.$notify.error({ title: "Error sending memo", message: err.message, duration: 0, showClose: true });
+        vue.$notify.error({ title: i18n.t('message.error_sending_memo'), message: err.message, duration: 0, showClose: true });
         console.dir(err);
         log(err);
       }
@@ -736,14 +792,14 @@ var store = new Vuex.Store({
 
       var from;
       if(!transactionForm.from) {
-        vue.$message.error("You must choose a From address!")
+        vue.$message.error(i18n.t('message.you_must_choose_a_from_address'))
         return;
       }
       from = transactionForm.from;
       log("Sending from address " + from);
 
       if(!transactionForm.destinationAddresses.length) {
-        vue.$message.error("You must have at least one recipient in your transaction!");
+        vue.$message.error(i18n.t('message.you_must_have_at_least_one_recipient_in_your_transaction'));
         return;
       }
       // TODO: support 1,0=1.0 notation
@@ -753,7 +809,8 @@ var store = new Vuex.Store({
       if (transactionForm.amount >= 0 && (transactionForm.amount <= MAX_MONEY) && (transactionForm.amount == transactionForm.amount) ) {
         // valid amount
       } else {
-        var msg = "Amount must be number >= 0 and <= " + MAX_MONEY;
+
+        var msg = i18n.t('message.amount_must_be_number_valid') + " " + MAX_MONEY;
         vue.$message.error(msg);
         return;
       }
@@ -774,10 +831,10 @@ var store = new Vuex.Store({
       console.log("shieldedXtn=" + shieldedXtn);
 
       // The default amount is *no value*, not zero. Avoid NaNs
-      transactionForm.amount = transactionForm.amount ? parseFloat(transactionForm.amount) : '';
+      transactionForm.amount = ( transactionForm.amount >= 0 ) ? parseFloat(transactionForm.amount) : '';
       var num_destinations   = transactionForm.destinationAddresses.length;
       var transaction_amount = transactionForm.amount * num_destinations;
-      // 1% of total amount being sent, ignoring network fee
+      // 1% of total amount being sent SUGGESTED DEV FEE, ignoring network fee
       // with a max of 10HUSH, only on transactions containing zaddrs
       var dev_fee            = shieldedXtn ? 0.01 * transaction_amount : 0.0;
       if (dev_fee > 10.0) {
@@ -805,7 +862,10 @@ var store = new Vuex.Store({
 
       for(let receiver of transactionForm.destinationAddresses) {
        var addr              = receiver.toString();
+       log("transactionForm.amount=" + transactionForm.amount);
+
        var transactionAmount = sprintf("%.8f", transactionForm.amount);
+       log("transactionAmount=" + transactionAmount);
 
        // zaddrs get memos
        if ( addr.substring(0,1) == 'z' ) {
@@ -837,22 +897,24 @@ var store = new Vuex.Store({
             log("Wallet has enough funds for transaction! current_balance=" + current_balance);
             log("About to z_sendmany(" + from + ",receivers,1," + transactionForm.fee + ")");
             var result = await client.z_sendmany(from,receivers,1,transactionForm.fee);
-            var msg    = "Transaction for total amount of " + total_amount + " HUSH queued successfully!";
+            //gilardh TODO : translate to optimize later if needed 
+            var msg    = i18n.t('message.transaction_for_total_amount_of') + " " + total_amount + " " +  i18n.t('message.hush_queued_successfully');
             vue.$message.success(msg);
             console.log(msg);
             commit('addOrUpdateOperationStatus', {id: result.toString(), status: "queued"});
         } else {
             // Not enough funds in wallet to make this transaction!
-            var msg  = "Current wallet has " + current_balance + "\nbut " + total_amount;
-            msg     += " HUSH needed for this transaction!\n";
-            msg     += "You need " + (total_amount - current_balance) + " to make this transaction";
+            //gilardh TODO : translate to optimize later if needed 
+            var msg  = i18n.t('message.current_wallet_has') + " " + current_balance + "\n" + i18n.t('message.but') + " " + total_amount;
+            msg     += + " " + i18n.t('message.hush_needed_for_this_transaction') + "\n";
+            msg     += i18n.t('message.you_need') + " " + (total_amount - current_balance) + " " + i18n.t('message.to_make_this_transaction');
             console.log(msg);
             vue.$message.error(msg);
         }
       } catch(err) {
         if(err) {
             console.log(err);
-            vue.$message.error("Oh shite! " + err);
+            vue.$message.error(i18n.t('message.oh_shite') + " " + err);
             console.log(receivers);
         }
       }
@@ -882,6 +944,98 @@ var store = new Vuex.Store({
       }
     },
 
+    loadConfig({ commit }) {
+      var platform     = os.platform();
+      var configFile = os.homedir() + "/hush-ng/config.json";
+
+      if(platform == "win32") {
+        configFile = os.homedir() + "\\hush-ng\\config.json";
+      }
+
+      if (fs.existsSync(configFile)) {
+        log("found configFile="+configFile);
+        var data = '';
+        var stream = fs.createReadStream(configFile)
+        stream.on('data', function(chunk) {
+          data += chunk;
+        })
+        .on('end', function() {
+          var config = JSON.parse(data);
+          commit("setConfig",config);
+        });
+      } else {
+          log("configFile " + configFile + " not found!");
+      }
+    },
+
+    async zListReceivedByAddress({ commit }, addr,minconf) {
+        var xtns = await client.z_listReceivedByAddress(addr,minconf);
+        return xtns;
+    },
+
+    async renderChat({ commit }, contact) {
+        log("renderChat");
+        var self        = this;
+        // TODO: load from config
+        var zIntroducer = "zcQAMDJbgARwK5QqqXCoQX81iJoyf5sYqNF2dECHtAvhes1ss58hJdJ3TWAMBUZQSknMVo2S3xpu4KuCFYgfTK9FKdzBzY1";
+        var config      = store.dispatch('loadConfig');
+        log(config);
+
+        var xtns;
+        try {
+            xtns = await client.z_listReceivedByAddress(zIntroducer, 0);
+        } catch(err) {
+          vue.$notify.error({ title: i18n.t('message.error_finding_previous_messages_for') + " " + contact.nickName, message: err.message, duration: 0, showClose: true });
+          return;
+        }
+
+        for (let xtn of xtns) {
+            // Look for HushList memo headers to our introducer
+            var memo        = xtn.memo;
+            var decodedMemo = decodeMemo(memo);
+            var memoLength  = decodedMemo.length;
+            // memo header is JSON and must start with a paren
+            if (decodedMemo.substring(0,1) == "{") {
+                log("Potential JSON memo=" + decodedMemo);
+
+                var headerJSON;
+                try {
+                    headerJSON = JSON.parse(decodedMemo);
+                    log("Valid JSON!");
+                } catch(e) {
+                    console.log(e);
+                    continue;
+                }
+                // TODO: Key existence checks, i.e is it valid HushList JSON?
+                // TODO: key names are not finalized, should we optimize for size or readability?
+                var addr     = headerJSON["addr"];
+                var viewkey  = headerJSON["viewkey"];
+                // TODO: verify viewkey is the VK for addr
+                var result   = await client.z_validateaddress(addr);
+                if (result.isvalid) {
+                    log("Valid HL.addr, ismine="+ result.ismine);
+                    // Import this viewkey, so we can see memos *we send* to addr
+                    var imported = store.dispatch('importViewingKey',viewkey);
+
+                    if (imported) {
+                        // It's imported or already was imported
+                    } else {
+                        log("Failed to import viewingkey, skipping");
+                        continue;
+                    }
+                    // TODO: Render actual memos sent to this address, lol
+                } else {
+                    log("Address="+ addr + " is invalid zaddr");
+                    continue;
+                }
+            } else {
+                // TODO: what about completely anon HL messages, with no JSON?
+                log("Skipping txid=" + xtn.txid + " since no HL memo header found");
+            }
+        }
+
+    },
+
     saveContacts() {
       var self = this;
       var platform = os.platform();
@@ -906,3 +1060,12 @@ var store = new Vuex.Store({
   }
 });
 export default store;
+
+// without return value (will use fallback translation, default translation or key)
+//Vue.use(vuexI18n.plugin, store, {
+//    moduleName: 'i18n',
+//    onTranslationNotFound (locale, key) {
+//        console.warn(`i18n :: Key '${key}' not found for locale '${locale}'`);
+//    }}
+//);
+

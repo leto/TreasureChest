@@ -1,17 +1,18 @@
 <template>
   <div id="lists">
     <p id="intro">
-      Below is a list of your private HushLists.
-      Each HushList is a list of Contacts stored locally on this machine,
-      it is not stored in the blockchain.
+      {{$t('message.intro_groups_1')}}
+      <br />
+      {{$t('message.intro_groups_2')}}
+      {{$t('message.intro_groups_3')}}
       
       <br />
-      <span>Shielded addresses (zaddrs) are private and anonymous while transparent addresses (taddrs) are public and pseudonymous</span>
+      <span>{{$t('message.intro_groups_4')}}</span>
     </p>
-    <a class="button" id="add-addressbookentry" v-on:click="newHushList()">New HushList</a>
+    <a class="button" id="add-addressbookentry" v-on:click="newHushList()">{{$t('message.new_hushList')}}</a>
     <div class="address-list" id="z-addr">
-      <div class="type">HushList Name</div>
-      <div class="copy"># Of Contacts</div>
+      <div class="type">{{$t('message.hushList_name')}}</div>
+      <div class="copy">{{$t('message.of_contacts')}}</div>
       <ul class="address-details">
         <li>
           <div class="balance" style="clear: both;"></div>
@@ -25,7 +26,27 @@
 
 <script>  
   import copy from 'copy-to-clipboard';
+  import Vue from 'vue'
+  import Vuex from 'vuex'
+  import VueI18n from 'vue-i18n'
+  import messages from '../../../lang/messages'
   import { mapState,mapGetters, mapActions } from 'vuex'
+
+  Vue.use(Vuex)
+  Vue.use(VueI18n)
+
+  // Create VueI18n instance with options
+  //let localisation = navigator.language
+  let localisation = navigator.language.split("-")[0] // Use browser first language
+  const i18n = new VueI18n({
+    fallbackLocale: 'en',
+    locale: localisation,
+    //dateTimeFormats,
+    //numberFormats
+    messages
+  })
+
+  let vue = new Vue({ i18n })
 
   export default {
     name: 'lists',
@@ -36,7 +57,8 @@
     methods: {
       copy (value) {
         copy(value)
-        alert('Copied ' + value + ' to clipboard.')
+        //alert('Copied ' + value + ' to clipboard.')
+        alert(i18n.t('message.copied_to_clipboard', { value: value }))
       }     
     },
     mounted: function() {
@@ -45,8 +67,12 @@
   }
 </script>
 
+
+
 <style>
   @import url('https://fonts.googleapis.com/css?family=Poppins:300,400,500,700');
+
+  
 
   * {
     font-family: 'Poppins', sans-serif;
