@@ -1,26 +1,26 @@
-#  Hush Next-Generation
+#  Pirates TreasureChest
 
-The Next Generation Hush GUI will include an integrated experience for users to
-do tasks related to their wallets and having conversations with Hush Contacts,
-i.e. sending + receiving HushList memos.
+Arg, matey!! This GUI integrated experience for Pirate users to do tasks
+related to their wallets and having conversations with their slimy sea-rotten
+Contacts, i.e. sending + receiving HushList memos.
 
-This wallet supports Shielded Addresses and Shielded Transactions.
+This wallet supports Shielded Addresses and Shielded Transactions, as transparent
+addresses are only used by landlubbers (and notary nodes).
 
-Currently we are focused on HushList-related operations, since other basic wallets
-exist. This codebase uses the Electron framework to enable cross-platform support
+This codebase uses the Electron framework to enable cross-platform support
 and supports Linux, Mac and Windows.
 
 ## Preview
 
-<img src="https://raw.githubusercontent.com/MyHush/hush-ng/dev/static/hush-ng-addresses-preview.png" alt="Hush-NG preview">
+...
 
-## Installing + Running Hush-NG
+## Installing + Running TreasureChest
 
 You must have NodeJS and npm installed: https://nodejs.org/en/download/
 
     # clone repo
-    git clone https://github.com/MyHush/hush-ng
-    cd hush-ng
+    git clone https://github.com/leto/TreasureChest
+    cd TreasureChest
 
     # install dependencies
     npm install
