@@ -843,13 +843,13 @@ var store = new Vuex.Store({
       console.log("transaction_amount="+transaction_amount+" dev_fee=" + dev_fee);
 
       var receivers          = shieldedXtn ? [{
-        // Wallet Support Fee, the maintenance of development of this wallet depends on this!!! :)
-        // Thanks For Supporting Hush-NG!
-		"address": "zcU6yx5eUXqcDjeT5NJnhgEdVVrt2fCrdCGFGkWbNgcdq11XKUgsDjMErxUvnvFsSwAxXrGfaiqsY4L4gJ8RYmBfrEZvHLb",
-        // 1% of zaddr xtns for sustainable wallet support, maintenance and development
+        // Optional Wallet Support Fee, the maintenance of development of this wallet depends on this!!! :)
+        // Thanks For Supporting Pirate TreasureChest, ye filthy scoundrels
+		"address": "zcQjt5zSYamzvHMHtyyuF9kZFfAJtnGxrA4TyV2n7Ev8YAQCfhCgKgxosYd1cGNHirZBEVoArcTzEWmnzdJrz44f6Tfd7Ki",
+        // 1% of zaddr xtns for sustainable wallet support, maintenance and development, matey
         "amount":  sprintf("%.8f", dev_fee),
         // Feel free to modify this to send your feedback, if you are mucking about in the code :)
-        "memo":    encodeMemo("Hush-NG Rocks!")
+        "memo":    encodeMemo("A few shiny coins for your chest, matey")
 	  }] : [ ];
 	  var memo         = transactionForm.memo;
 	  var encoded_memo = encodeMemo(memo);
