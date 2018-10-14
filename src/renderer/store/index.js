@@ -835,10 +835,10 @@ var store = new Vuex.Store({
       var num_destinations   = transactionForm.destinationAddresses.length;
       var transaction_amount = transactionForm.amount * num_destinations;
       // 1% of total amount being sent SUGGESTED DEV FEE, ignoring network fee
-      // with a max of 10HUSH, only on transactions containing zaddrs
+      // with a max of 10ARRR, only on transactions containing zaddrs
       var dev_fee            = shieldedXtn ? 0.01 * transaction_amount : 0.0;
       if (dev_fee > 10.0) {
-        dev_fee = 10.0; // maximum of 10 HUSH dev donation per xtn
+        dev_fee = 10.0; // maximum of 10 ARRR dev donation per xtn
       }
       console.log("transaction_amount="+transaction_amount+" dev_fee=" + dev_fee);
 

@@ -131,7 +131,7 @@ export default {
     
     sent_and_received_transactions: "Sent and received transactions",
     transaction_history: "Transaction History",
-    confirm_transaction_form: "Are you sure you want to make a transaction of {total_amount} HUSH ?",
+    confirm_transaction_form: "Are you sure you want to make a transaction of {total_amount} ARRR ?",
     open_block_explorer: "Click on a row to open block explorer",
     
     incoming: "Incoming",
@@ -200,12 +200,12 @@ export default {
     amount_must_be_number_valid: "Amount must be number >= 0 and <=",
 
     transaction_for_total_amount_of: "Transaction for total amount of",
-    hush_queued_successfully: "HUSH queued successfully!",
+    hush_queued_successfully: "ARRR queued successfully!",
     current_wallet_has: "Current wallet has",
     but: "but",
-    hush_needed_for_this_transaction: "HUSH needed for this transaction!",
+    hush_needed_for_this_transaction: "ARRR needed for this transaction!",
     you_need: "You need",
-    to_make_this_transaction: "HUSH to make this transaction",
+    to_make_this_transaction: "ARRR to make this transaction",
 
     error_finding_previous_messages_for: "Error finding previous messages for",
 
@@ -359,7 +359,7 @@ export default {
     
     sent_and_received_transactions: "Transactions envoyés et reçues",
     transaction_history: "Historique des transactions",
-    confirm_transaction_form: "Êtes-vous sur de vouloir effectuer une transaction de {total_amount} HUSH ?",
+    confirm_transaction_form: "Êtes-vous sur de vouloir effectuer une transaction de {total_amount} ARRR ?",
     open_block_explorer: "Cliquez sur une ligne pour ouvrir l'explorateur de blocs",
     
     incoming: "Reçu",
@@ -426,12 +426,12 @@ export default {
     amount_must_be_number_valid: "Le montant doit être un nombre nombre entre >= 0 et <=",
 
     transaction_for_total_amount_of: "Transaction pour un montant total de",
-    hush_queued_successfully: "HUSH avec succès !",
+    hush_queued_successfully: "ARRR avec succès !",
     current_wallet_has: "Le portefeuille actuel contient",
     but: "mais",
-    hush_needed_for_this_transaction: "HUSH sont nécessaire pour cette transaction !",
+    hush_needed_for_this_transaction: "ARRR sont nécessaire pour cette transaction !",
     you_need: "Vous avez besoin de",
-    to_make_this_transaction: "HUSH pour réaliser cette transation.",
+    to_make_this_transaction: "ARRR pour réaliser cette transation.",
 
     error_finding_previous_messages_for: "Erreur lors de la recherche des messages précédents pour r",
     

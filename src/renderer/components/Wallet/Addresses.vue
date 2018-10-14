@@ -57,9 +57,9 @@
           <li><icon class=fa-fw name=balance-scale></icon>{{$t('message.total')}}:</li>
         </ul>
         <ul id="balances">
-          <li v-bind:class="{ unconfirmed: !tBalance.valid }" > {{ tBalance.balance }} HUSH</li>
-          <li v-bind:class="{ unconfirmed: !zBalance.valid }" > {{ zBalance.balance }} HUSH</li>
-          <li v-bind:class="{ unconfirmed: !totalBalance.valid }"> {{ totalBalance.balance }} HUSH</li>
+          <li v-bind:class="{ unconfirmed: !tBalance.valid }" > {{ tBalance.balance }} ARRR</li>
+          <li v-bind:class="{ unconfirmed: !zBalance.valid }" > {{ zBalance.balance }} ARRR</li>
+          <li v-bind:class="{ unconfirmed: !totalBalance.valid }"> {{ totalBalance.balance }} ARRR</li>
         </ul>
       </div>
         <div class="box alt">
@@ -68,9 +68,9 @@
             <icon name=upload></icon>{{ totalBytesSent }} {{$t('message.bytes_sent')}}<br/>
         </div>
         <div class="box alt">
-            <icon name="brands/btc"></icon> {{ priceBTC }} BTC/HUSH<br/>
-            <icon name="euro-sign"></icon> {{ priceEUR }} EUR/HUSH<br/>
-            <icon name="dollar-sign"></icon> {{ priceUSD }} USD/HUSH<br/>
+            <icon name="brands/btc"></icon> {{ priceBTC }} BTC/ARRR<br/>
+            <icon name="euro-sign"></icon> {{ priceEUR }} EUR/ARRR<br/>
+            <icon name="dollar-sign"></icon> {{ priceUSD }} USD/ARRR<br/>
         </div>
       </div>
 

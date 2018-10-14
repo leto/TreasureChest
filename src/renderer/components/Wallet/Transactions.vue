@@ -158,7 +158,7 @@
 
         <el-table-column prop="amount" v-bind:label="$t('message.amount')" width="160"> 
           <template slot-scope="scope">          
-             <div style="float:right"> {{ Math.abs(scope.row.amount) }} HUSH </div>           
+             <div style="float:right"> {{ Math.abs(scope.row.amount) }} ARRR </div>           
           </template>
         </el-table-column>
         <el-table-column prop="address" v-bind:label="$t('message.destination_address')" width="*" >
