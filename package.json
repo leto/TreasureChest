@@ -1,8 +1,8 @@
 {
-  "name": "hush-ng",
+  "name": "TreasureChest",
   "version": "0.0.1",
   "author": "Duke Leto",
-  "description": "HUSH Wallet And More",
+  "description": "Pirate (ARRR) Wallet And More",
   "license": "GPL-3.0",
   "main": "./dist/electron/main.js",
   "scripts": {
@@ -17,8 +17,8 @@
     "postinstall": ""
   },
   "build": {
-    "productName": "hush-ng",
-    "appId": "hushorg.hushng",
+    "productName": "TreasureChest",
+    "appId": "pirate.TreasureChest",
     "directories": {
       "output": "build"
     },
