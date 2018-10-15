@@ -69,7 +69,7 @@
         </div>
         <div class="box alt">
             <icon name="brands/btc"></icon> {{ priceBTC }} BTC/ARRR<br/>
-            <icon name="euro-sign"></icon> {{ priceEUR }} EUR/ARRR<br/>
+            <icon name="euro-sign"></icon> {{ priceKMD }} KMD/ARRR<br/>
             <icon name="dollar-sign"></icon> {{ priceUSD }} USD/ARRR<br/>
         </div>
       </div>
@@ -174,7 +174,7 @@
         'totalBytesRecv',
         'totalBytesSent',
         'priceBTC',
-        'priceEUR',
+        'priceKMD',
         'priceUSD',
       ]),     
       ...mapGetters([

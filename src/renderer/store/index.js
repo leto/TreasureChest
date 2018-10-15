@@ -90,7 +90,7 @@ var store = new Vuex.Store({
     totalBytesRecv: '...',
     totalBytesSent: '...',
     priceBTC: '...',
-    priceEUR: '...',
+    priceKMD: '...',
     priceUSD: '...',
     totalBalance: { 
       balance : i18n.t('message.calculating'),
@@ -259,8 +259,8 @@ var store = new Vuex.Store({
     setPriceUSD (state, price) {
       state.priceUSD = price;
     },
-    setPriceEUR (state, price) {
-      state.priceEUR = price;
+    setPriceKMD (state, price) {
+      state.priceKMD = price;
     },
     setPriceBTC (state, price) {
       state.priceBTC = price;
@@ -515,13 +515,13 @@ var store = new Vuex.Store({
         // seconds like most of UI. We don't want to get banned
         // and a watched coin price doesn't moon.
        if ( diff > interval ) {
-            axios.get("https://api.coinmarketcap.com/v1/ticker/hush/?convert=EUR")
+            axios.get("https://dexstats.info/api/pirateprice.php")
             .then(response => {
                 // todo: better error checking
                 // todo: support arbitrary fiat tickers supplied by user
-                commit('setPriceUSD', sprintf("%.8f", response.data[0].price_usd) );
-                commit('setPriceEUR', sprintf("%.8f", response.data[0].price_eur) );
-                commit('setPriceBTC', sprintf("%.8f", response.data[0].price_btc) );
+                commit('setPriceUSD', sprintf("%.8f", response.data.priceUSD) );
+                commit('setPriceKMD', sprintf("%.8f", response.data.priceKMD) );
+                commit('setPriceBTC', sprintf("%.8f", response.data.priceBTC) );
                 //console.log("Updated price stats lastUpdate=" + this.state.lastUpdate + " diff=" + diff );
             }).catch(e => {
                 console.log("Error getting price stats!");
@@ -533,7 +533,7 @@ var store = new Vuex.Store({
       } catch(err) {
         // CMC not returning data should not be considered an important error
         commit('setPriceUSD', '?');
-        commit('setPriceEUR', '?');
+        commit('setPriceKMD', '?');
         commit('setPriceBTC', '?');
       }
     },
