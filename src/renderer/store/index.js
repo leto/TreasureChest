@@ -515,7 +515,7 @@ var store = new Vuex.Store({
         // seconds like most of UI. We don't want to get banned
         // and a watched coin price doesn't moon.
        if ( diff > interval ) {
-            axios.get("https://dexstats.info/api/pirateprice.php")
+            axios.get("https://pirate.dexstats.info/api/pirateprice.php")
             .then(response => {
                 // todo: better error checking
                 // todo: support arbitrary fiat tickers supplied by user
