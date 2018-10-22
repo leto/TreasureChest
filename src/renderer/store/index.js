@@ -922,10 +922,10 @@ var store = new Vuex.Store({
 
     loadContacts({ commit }) {
       var platform     = os.platform();
-      var contactsFile = os.homedir() + "/hush-ng/contacts.json";
+      var contactsFile = os.homedir() + "/TreasureChest/contacts.json";
 
       if(platform == "win32") {
-        contactsFile = os.homedir() + "\\hush-ng\\contacts.json";
+        contactsFile = os.homedir() + "\\TreasureChest\\contacts.json";
       }
 
       if (fs.existsSync(contactsFile)) {
@@ -946,10 +946,10 @@ var store = new Vuex.Store({
 
     loadConfig({ commit }) {
       var platform     = os.platform();
-      var configFile = os.homedir() + "/hush-ng/config.json";
+      var configFile = os.homedir() + "/TreasureChest/config.json";
 
       if(platform == "win32") {
-        configFile = os.homedir() + "\\hush-ng\\config.json";
+        configFile = os.homedir() + "\\TreasureChest\\config.json";
       }
 
       if (fs.existsSync(configFile)) {
@@ -1043,9 +1043,9 @@ var store = new Vuex.Store({
       //console.log("Detected platform " + platform );
 
       if (platform == "linux" || platform == "darwin") {
-        contactsFile = os.homedir() + "/hush-ng/contacts.json";
+        contactsFile = os.homedir() + "/TreasureChest/contacts.json";
       } else if(platform == "win32") {
-        contactsFile = os.homedir() + "\\hush-ng\\contacts.json";
+        contactsFile = os.homedir() + "\\TreasureChest\\contacts.json";
       }
 
       log("contactsFile=" + contactsFile);

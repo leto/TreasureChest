@@ -6,7 +6,7 @@
 
 <script>
   export default {
-    name: 'hush-ng'
+    name: 'TreasureChest'
   }
 </script>
 
