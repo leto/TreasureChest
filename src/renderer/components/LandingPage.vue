@@ -29,12 +29,13 @@
         </div>
         <div class="doc">
           <div class="title alt">{{$t('message.join_us')}}</div>
-          <button class="button button-alt" @click="open('https://github.com/MyHush')">Github</button>
-          <button class="button button-alt" @click="open('https://myhush.org/discord.html')">Discord</button>
-          <button class="button button-alt" @click="open('https://twitter.com/MyHushTeam')">Twitter</button>
-          <!-- <button class="button button-alt" @click="open('https://fb.me/MyHushTeam')">Facebook</button> -->
-          <!-- <button class="button button-alt" @click="open('https://bitcointalk.org/index.php?topic=2008578.0')">Bitcoin Talk</button> -->
-          <button class="button button-alt" @click="open('https://reddit.com/r/myhush/')">Reddit</button>
+          <button class="button button-alt" @click="open('https://pirate.dexstats.info/?TreasureChest')">Onboarding</button>
+          <button class="button button-alt" @click="open('https://github.com/PirateNetwork')">Github</button>
+          <button class="button button-alt" @click="open('https://discordapp.com/invite/53M27QD')">Discord</button>
+          <button class="button button-alt" @click="open('https://twitter.com/PirateChain')">Twitter</button>
+          <button class="button button-alt" @click="open('http://https//bitcointalk.org/index.php?topic=4979549.0')">Bitcoin Talk</button>
+          <button class="button button-alt" @click="open('https://reddit.com/r/piratechain/')">Reddit</button>
+          <button class="button button-alt" @click="open('https://medium.com/piratechain')">Medium</button>
         </div>
       </div>
     </main>
