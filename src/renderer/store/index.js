@@ -120,8 +120,8 @@ var store = new Vuex.Store({
     contacts:[
       {
         id: 1,
-        address: "zcQAMDJbgARwK5QqqXCoQX81iJoyf5sYqNF2dECHtAvhes1ss58hJdJ3TWAMBUZQSknMVo2S3xpu4KuCFYgfTK9FKdzBzY1",
-        nickName:"Duke",
+        address: "zc9AetR1Td6kYzbZYx6yG9AKYtmj1q9pUuxbfDBXeXiF8W48qZAf1pjUkVUuxe3pA3aZKWQ9rhntAmzKdfH35m97jWr2z7P",
+        nickName:"Duke Leto",
       }
     ],
     groupedDestinationAddresses:[]
@@ -977,7 +977,7 @@ var store = new Vuex.Store({
         log("renderChat");
         var self        = this;
         // TODO: load from config
-        var zIntroducer = "zcQAMDJbgARwK5QqqXCoQX81iJoyf5sYqNF2dECHtAvhes1ss58hJdJ3TWAMBUZQSknMVo2S3xpu4KuCFYgfTK9FKdzBzY1";
+        var zIntroducer = "zc9AetR1Td6kYzbZYx6yG9AKYtmj1q9pUuxbfDBXeXiF8W48qZAf1pjUkVUuxe3pA3aZKWQ9rhntAmzKdfH35m97jWr2z7P";
         var config      = store.dispatch('loadConfig');
         log(config);
 
