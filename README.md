@@ -35,7 +35,7 @@ You must have a recent version of NodeJS and npm installed: https://nodejs.org/e
 
 ## Contributing
 
-You are very welcome to submit patches to Hush-NG! Please send them to the `dev` branch,
+You are very welcome to submit patches to Pirate TreasureChest! Please send them to the `dev` branch,
 which is our tip of development.
 
 ## License
