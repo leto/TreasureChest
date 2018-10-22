@@ -1,24 +1,24 @@
 export default {
   en: {
     message: {
-    welcome_to_hushNG: "Welcome to HushNG!",
-	installing_hushNG: "Installing HushNG",
-	launch_hushNG: "Launch HushNG",
+    welcome_to_hushNG: "Welcome to Pirate TreasureChest!",
+	installing_hushNG: "Installing Pirate TreasureChest",
+	launch_hushNG: "Launch Pirate TreasureChest",
 	cancel_setup: "Cancel setup",
-	join_us: "Join us!",
+	join_us: "Join us for adventure on the shielded seas!",
 	getting_started: "Getting Started",
 	initialize_wallet: "Initialize wallet",
-	getting_started_1: "Hush Next-generation is your gateway to the Hush blockchain. Manage your wallets ",
-	getting_started_2: "and use HushList protocol to send and receive encrypted and anonymous messages, which are called memos.",
-	getting_started_3: "Start by downloading the Hush proving-key. Afterwards, your wallet will be initialized and ready for use",
+	getting_started_1: "Pirate TreasureChest is your gateway to the Pirate blockchain. Manage your wallets ",
+	getting_started_2: "and use PirateList protocol to send and receive encrypted and anonymous messages, which are called memos.",
+	getting_started_3: "Start by downloading the Pirate proving-key. Afterwards, your wallet will be initialized and ready for use",
 	
-	error_connect_daemon_title: "Error connecting to Hush daemon",
-	error_connect_daemon_message: "Please make sure Hush is running",
-    error_talking_daemon_title: "Error talking to Hush daemon",
+	error_connect_daemon_title: "Error connecting to Pirate daemon",
+	error_connect_daemon_message: "Please make sure Pirate is running",
+    error_talking_daemon_title: "Error talking to Pirate daemon",
 
-    hushd_is_already_running: "Hush is already running! Skipping download process",
+    hushd_is_already_running: "Pirate is already running! Skipping download process",
     
-    list_of_contacts: "Below is a list of your contacts",
+    list_of_contacts: "Below is a list of ye contacts",
     new_contact: "New contact",
     edit: "Edit",
     chat: "Chat",
@@ -27,8 +27,8 @@ export default {
     cancel: "Cancel",
     send: "Send",
     adress: "Address",
-    addresses: "Adresses",
-    groups: "Groupes",
+    addresses: "Addresses",
+    groups: "Groups",
     transactions: "Transactions",   
     destination_address: "Destination address", 
     from: "From",
@@ -51,7 +51,7 @@ export default {
     lists: "Lists",
     conversations: "Conversations",
     advanced: "Advanced",
-    hushNG_settings: "HushNG Settings",
+    hushNG_settings: "TreasureChest Settings",
     settings: "Settings",
     
     informations: "Information",
@@ -164,8 +164,8 @@ export default {
     import_shielded_address: "Import Shielded Address",
     
     make_sure_hushd_is_running: "Please make sure hushd is running",
-    error_connecting_to_hush_daemon: "Error connecting to Hush daemon",
-    error_talking_to_hush_daemon: "Error talking to Hush daemon",
+    error_connecting_to_hush_daemon: "Error connecting to Pirate daemon",
+    error_talking_to_hush_daemon: "Error talking to Pirate daemon",
 
     block_height: "Block height",
     peers: "Peers",
@@ -222,22 +222,22 @@ export default {
   
   fr: {
    message: {
-	welcome_to_hushNG: "Bienvenue sur HushNG !",
-	installing_hushNG: "Installation de HushNG",
-	launch_hushNG: "Lancement de HushNG",
+	welcome_to_hushNG: "Bienvenue sur TreasureChest !",
+	installing_hushNG: "Installation de TreasureChest",
+	launch_hushNG: "Lancement de TreasureChest",
 	cancel_setup: "Annuler l'installation",
 	join_us: "Rejoignez-nous!",
 	getting_started: "Commencez",
 	initialize_wallet: "Initialiser le portefeuille",
 	
-    getting_started_1: "Hush Next-Generation est votre passerelle vers la blockchain Hush.",
-    getting_started_2: "GÃ©rez vos portefeuilles et utilisez le protocole HushList pour envoyer et recevoir des messages chiffrÃ©s et anonymes, appelÃ©s mÃ©mos.",
-    getting_started_3: "Commencez par télécharger la clé de vérification Hush. Ensuite, votre portefeuille sera initialisé et prêt à l'emploi",
-	error_connect_daemon_title: "Erreur lors de la connexion au daemon Hush",
-    error_connect_daemon_message: "S'il vous plaît, assurez-vous que Hush est en cours d'exécution",
-    error_talking_daemon_title: "Erreur lors de la communication avec le daemon Hush",
+    getting_started_1: "Pirate TreasureChst est votre passerelle vers la blockchain Pirate.",
+    getting_started_2: "GÃ©rez vos portefeuilles et utilisez le protocole PirateList pour envoyer et recevoir des messages chiffrÃ©s et anonymes, appelÃ©s mÃ©mos.",
+    getting_started_3: "Commencez par télécharger la clé de vérification Pirate. Ensuite, votre portefeuille sera initialisé et prêt à l'emploi",
+	error_connect_daemon_title: "Erreur lors de la connexion au daemon Pirate",
+    error_connect_daemon_message: "S'il vous plaît, assurez-vous que Pirate est en cours d'exécution",
+    error_talking_daemon_title: "Erreur lors de la communication avec le daemon Pirate",
 
-    hushd_is_already_running: "Hush est déjà en cours d'exécution! Le processus de téléchargement est ignoré.",
+    hushd_is_already_running: "Pirate est déjà en cours d'exécution! Le processus de téléchargement est ignoré.",
     
     list_of_contacts: "Ci-dessous la liste de vos contacts",
     new_contact: "Nouveau contact",
@@ -272,7 +272,7 @@ export default {
     lists: "Listes",
     conversations: "Conversations",
     advanced: "Avancée",
-    hushNG_settings: "Paramètres HushNG",
+    hushNG_settings: "Paramètres TreasureChest",
     settings: "Paramètres",
 
     informations: "Informations",
@@ -392,8 +392,8 @@ export default {
     import_shielded_address: "Importer une adresse protégée",
 
     make_sure_hushd_is_running: "S'il vous plaît assurez-vous que hushd est lancé.",
-    error_connecting_to_hush_daemon: "Erreur de connection au démon de Hush.",
-    error_talking_to_hush_daemon: "Erreur de communication au démon de Hush",
+    error_connecting_to_hush_daemon: "Erreur de connection au démon de Pirate.",
+    error_talking_to_hush_daemon: "Erreur de communication au démon de Pireate.",
 
     block_height: "Nb de bloc",
     peers: "Pairs",
