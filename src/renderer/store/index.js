@@ -108,6 +108,7 @@ var store = new Vuex.Store({
     availableBalance :0.0,
     totalAmount: '...',
     blockHeight: i18n.t('message.scanning'),
+    notarized: 0,
     magicString: '...',
     peerCount: i18n.t('message.discovering'),
     walletPolling: false,
@@ -252,6 +253,9 @@ var store = new Vuex.Store({
     },
     setBlockheight (state, height) {
       state.blockHeight = height;
+    },
+    setNotarized (state, notarized) {
+      state.notarized = notarized;
     },
     setMagicString (state, string) {
       state.magicString = string;
@@ -483,6 +487,7 @@ var store = new Vuex.Store({
         var data = await client.getInfo();
         commit('setPeerCount', data.connections);
         commit('setBlockheight', data.blocks);
+        commit('setNotarized', data.notarized);
 
       } catch(err) {
         commit('setPeerCount', '0');
