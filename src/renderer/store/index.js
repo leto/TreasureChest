@@ -92,6 +92,7 @@ var store = new Vuex.Store({
     priceBTC: '...',
     priceKMD: '...',
     priceUSD: '...',
+    priceEUR: '...',
     totalBalance: { 
       balance : i18n.t('message.calculating'),
       valid :true
@@ -262,6 +263,9 @@ var store = new Vuex.Store({
     },
     setPriceUSD (state, price) {
       state.priceUSD = price;
+    },
+    setPriceEUR (state, price) {
+      state.priceEUR = price;
     },
     setPriceKMD (state, price) {
       state.priceKMD = price;
@@ -518,15 +522,15 @@ var store = new Vuex.Store({
         var diff       = Math.abs(lastUpdate - now);
         // update stats roughly every minute instead of every 20s (polling period)
         // seconds like most of UI. We don't want to get banned
-        // and a watched coin price doesn't moon.
+        // and a watched coin doesn't moon, ye salty dogs
        if ( diff > interval ) {
             axios.get("https://pirate.dexstats.info/api/pirateprice.php")
             .then(response => {
                 // todo: better error checking
-                // todo: support arbitrary fiat tickers supplied by user
-                commit('setPriceUSD', sprintf("%.8f", response.data.priceUSD) );
                 commit('setPriceKMD', sprintf("%.8f", response.data.priceKMD) );
                 commit('setPriceBTC', sprintf("%.8f", response.data.priceBTC) );
+                commit('setPriceUSD', sprintf("%.8f", response.data.priceUSD) );
+                commit('setPriceEUR', sprintf("%.8f", response.data.priceEUR) );
                 //console.log("Updated price stats lastUpdate=" + this.state.lastUpdate + " diff=" + diff );
             }).catch(e => {
                 console.log("Error getting price stats!");
@@ -536,10 +540,11 @@ var store = new Vuex.Store({
             console.log("skipping price check");
         }
       } catch(err) {
-        // CMC not returning data should not be considered an important error
-        commit('setPriceUSD', '?');
+        // Your ship is aflame, but ye are surrounded by water thankfully
         commit('setPriceKMD', '?');
         commit('setPriceBTC', '?');
+        commit('setPriceUSD', '?');
+        commit('setPriceEUR', '?');
       }
     },
 
