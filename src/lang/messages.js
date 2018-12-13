@@ -9,7 +9,7 @@ export default {
 	getting_started: "Getting Started",
 	initialize_wallet: "Initialize wallet",
 	getting_started_1: "Pirate TreasureChest is your gateway to the Pirate blockchain. Manage your wallets ",
-	getting_started_2: "and use PirateList protocol to send and receive encrypted and anonymous messages, which are called memos.",
+	getting_started_2: "and send/receive encrypted and anonymous messages, which are called memos.",
 	getting_started_3: "Start by downloading the Pirate proving-key. Afterwards, your wallet will be initialized and ready for use",
 	
 	error_connect_daemon_title: "Error connecting to Pirate daemon",
@@ -163,7 +163,7 @@ export default {
     import_transparent_address: "Import Transparent Address",
     import_shielded_address: "Import Shielded Address",
     
-    make_sure_hushd_is_running: "Please make sure hushd is running",
+    make_sure_hushd_is_running: "Please make sure the Pirate daemon is running",
     error_connecting_to_hush_daemon: "Error connecting to Pirate daemon",
     error_talking_to_hush_daemon: "Error talking to Pirate daemon",
 
@@ -391,7 +391,7 @@ export default {
     import_transparent_address: "Importer une adresse transparente",
     import_shielded_address: "Importer une adresse protégée",
 
-    make_sure_hushd_is_running: "S'il vous plaît assurez-vous que hushd est lancé.",
+    make_sure_hushd_is_running: "S'il vous plaît assurez-vous que Pirate est lancé.",
     error_connecting_to_hush_daemon: "Erreur de connection au démon de Pirate.",
     error_talking_to_hush_daemon: "Erreur de communication au démon de Pireate.",
 
